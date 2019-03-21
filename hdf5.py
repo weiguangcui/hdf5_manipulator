@@ -5,7 +5,7 @@ HDF5 files tools for HDF5 Manipulator
 import h5py
 
 
-def load(filename):
+def load(filename, gkey=None):
 
     """Load hdf5 file to data dictionary and return it.
 
@@ -16,10 +16,15 @@ def load(filename):
     f = h5py.File(filename, 'r')
 
     data = {}
-
-    for key in f:
-        data[key] = f[key][...]
-
+    
+    if gkey is None:
+        for key in f:
+            data[key] = f[key][...]
+    else:
+        print(gkey)
+        for j in gkey:
+            for key in f[j]:
+                data[key] = f[j+'/'+key][...]
     f.close()
 
     return data

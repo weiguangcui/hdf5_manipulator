@@ -42,12 +42,12 @@ if __name__ == '__main__':
     msg.box("HDF5 MANIPULATOR: EXTRACT")
 
     args = parser()
-    data = hdf5.load(args.input)
+    data = hdf5.load(args.input, gkey=args.keys.split(','))
 
     print "The following datasets were found in %s:\n" % args.input
     msg.list_dataset(data)
 
-    update_data(data, [k.strip() for k in args.keys.split(',')])
+    # update_data(data, [k.strip() for k in args.keys.split(',')])
 
     print "\nThe following dataset will be saved in %s:\n" % args.output
     msg.list_dataset(data)
